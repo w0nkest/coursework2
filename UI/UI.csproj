@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+	<UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Classes\Classes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Classes">
+      <HintPath>..\Classes\bin\Debug\net8.0\Classes.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+	
+</Project>

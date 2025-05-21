@@ -26,7 +26,7 @@
         public int Cash { get; set; } = 0;
 
         public Bonus Bonuses { get; set; }
-        
+
         public Wallet()         // No data - constructor for new one's
         {
             string bank = BankCard.BankGenerator();
@@ -85,7 +85,7 @@
         public static string BankGenerator()
         {
             Random rand = new Random();
-            List<string> list = [ "T-bank", "Alfabank", "Sber", "Gazprombank", "VTB", "Bank Sankt-Peterburg" ];
+            List<string> list = ["T-bank", "Alfabank", "Sber", "Gazprombank", "VTB", "Bank Sankt-Peterburg"];
             return list[rand.Next(0, list.Count - 1)];
         }
 
@@ -138,14 +138,14 @@
 
         public void WithdrawBonuses(int value)
         {
-            if (Amount >= value)
+            if (this.Amount >= value)
             {
                 foreach (var item in this.AddingHistory)
                 {
                     if (item.Value > value)
                     {
                         this.AddingHistory[item.Key] -= value;
-                        return;
+                        break;
                     }
                     else
                     {
@@ -153,7 +153,7 @@
                         this.AddingHistory.Remove(item.Key);
                     }
                 }
-                Amount -= value;
+                this.Amount -= value;
             }
             else return;
         }
@@ -164,9 +164,24 @@
 
             foreach (var item in this.AddingHistory)
             {
-                if (item.Key.AddDays(period) < DateTime.Now) this.AddingHistory.Remove(item.Key);
+                if (item.Key.AddDays(period) < DateTime.Now)
+                {
+                    Amount -= item.Value;
+                    this.AddingHistory.Remove(item.Key);
+                }
                 else return;
             }
         }
+    }
+
+    public class Goods
+    {
+        public string Name { get; set; }
+
+        public int Price { get; set; }
+    }
+
+    public class WeightGoods : Goods
+    {
     }
 }
