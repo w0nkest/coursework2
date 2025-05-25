@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Classes\Classes.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Classes">
       <HintPath>..\Classes\bin\Debug\net8.0\Classes.dll</HintPath>
     </Reference>
