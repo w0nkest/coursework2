@@ -12,7 +12,10 @@ namespace Classes
         {
             private readonly int increasePercent = 20;
 
-            public PremiumGoodsDecorator(Goods goods) : base(goods) { }
+            public PremiumGoodsDecorator(Goods goods) : base(goods) 
+            {
+                wrappedGoods.Name = $"Premium {wrappedGoods.Name}";
+            }
 
             public override int GetPrice()
             {
