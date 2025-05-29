@@ -1,13 +1,14 @@
 ﻿using Classes;
 
-namespace UserInterface
+namespace UI
 {
     class Program
     {
         [STAThread]
         static void Main()
         {
-
+            Form menu = new MenuForm();
+            menu.ShowDialog();
         }
     }
 }

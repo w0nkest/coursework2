@@ -8,19 +8,16 @@ namespace Classes
 {
     public class TimeGoods : Goods
     {
-        public int Hours { get; set; }
+        public int Hours { get; set; } = 0;
 
-        public int TotalPrice { get; set; }
-
-        public TimeGoods(string name, int price, int hours) : base(name, price)
+        public TimeGoods(string name, int price) : base(name, price)
         {
-            this.Hours = hours;
-            this.TotalPrice = this.Hours * this.Price;
+            this.Price = price;
         }
 
         public override int GetPrice()
         {
-            return this.TotalPrice;
+            return this.Price * Hours;
         }
     }
 }

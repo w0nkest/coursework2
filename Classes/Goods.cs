@@ -13,5 +13,10 @@
         }
 
         public abstract int GetPrice();
+
+        public override string ToString()
+        {
+            return $"{this.Name}, {this.Price}";
+        }
     }
 }

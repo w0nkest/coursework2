@@ -9,9 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Classes\Classes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Classes">
       <HintPath>..\Classes\bin\Debug\net8.0\Classes.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AdminSubMenu\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 	
 </Project>
