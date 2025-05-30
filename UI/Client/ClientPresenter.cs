@@ -11,15 +11,17 @@ namespace UI
     internal class ClientPresenter : IClientPresenter
     {
         public IClient view;
-        public Client client;
+        public ClientFacade facade;
 
-        public ClientPresenter(IClient view, Client client)
+        public ClientPresenter(IClient view, ClientFacade facade)
         {
             this.view = view;
-            this.client = client;
+            this.facade = facade;
+
             initializeGoods();
-            view.setUserText($"Клиент - {client.Name}\nКоличество бонусов - {client.getBonuses()}" +
-                $"\nВ кошельке - {client.getCashMoney()} руб.\nНа карте - {client.getCardMoney()} руб.");
+
+            view.setUserText($"Клиент - {facade.GetName()}\nКоличество бонусов - {facade.GetBonus()}" +
+                $"\nВ кошельке - {facade.GetCash()} руб.\nНа карте - {facade.GetCardMoney()} руб.");
         }
 
         public void initializeGoods()
@@ -35,14 +37,14 @@ namespace UI
 
         public void loadPaymentForm()
         {
-            if (client.getCashMoney() + client.getCardMoney() + client.getBonuses() >= calculatePurchaceSum())
+            if (facade.GetCash() + facade.GetCardMoney() + facade.GetBonus() >= calculatePurchaceSum())
             {
                 foreach (var goods in view.getCart())
                 {
                     //Console.WriteLine(goods.GetType());
                     if (goods.GetType() == typeof(TimeGoods))
                     {
-                        Console.WriteLine("timegood here");
+                        //Console.WriteLine("timegood here");
                         if ((goods as TimeGoods).Hours <= 0)
                         {
                             view.raiseMsgBox("Какие-то товары не были указаны по продолжительности! Перепроверьте список!");
@@ -54,7 +56,7 @@ namespace UI
                 return;
             }
             else view.raiseMsgBox("Ваших денег не хватает! Удалите товары, чтобы их сумма не превышвала " +
-                $"{client.getBonuses() + client.getCardMoney() + client.getCashMoney()}");
+                $"{facade.GetCash() + facade.GetCardMoney() + facade.GetBonus()}");
         }
 
         public void productAdding(Goods goods)

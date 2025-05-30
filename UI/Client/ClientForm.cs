@@ -19,14 +19,15 @@ namespace UI
         {
             InitializeComponent();
             Client client = new Client("Mankind");
+            ClientFacade f = new ClientFacade(client);
 
-            client.ExecuteCommand(new CommandAddCard(client.wallet.bankCard, 1500));
+            f.AddCardMoney(1500);
 
-            client.ExecuteCommand(new CommandAddBonus(client.wallet.Bonuses, DateTime.Now, 1000));
+            f.AddBonus(DateTime.Now, 1000);
 
-            client.ExecuteCommand(new CommandAddCash(client.wallet, 150));
+            f.AddCash(150);
 
-            presenter = new ClientPresenter(this, client);
+            presenter = new ClientPresenter(this, f);
         }
 
         public void raiseMsgBox(string msg)
