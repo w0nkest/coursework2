@@ -18,7 +18,20 @@ namespace UI
         public ClientForm()
         {
             InitializeComponent();
-            presenter = new ClientPresenter(this);
+            Client client = new Client("Mankind");
+
+            client.ExecuteCommand(new CommandAddCard(client.wallet.bankCard, 1500));
+
+            client.ExecuteCommand(new CommandAddBonus(client.wallet.Bonuses, DateTime.Now, 1000));
+
+            client.ExecuteCommand(new CommandAddCash(client.wallet, 150));
+
+            presenter = new ClientPresenter(this, client);
+        }
+
+        public void raiseMsgBox(string msg)
+        {
+            MessageBox.Show(msg);
         }
 
         public void setUserText(string msg)
@@ -58,8 +71,7 @@ namespace UI
 
         private void buttonPayment_Click(object sender, EventArgs e)
         {
-            //Form form = new Form();
-            //form.ShowDialog();
+            presenter.loadPaymentForm();
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
@@ -77,7 +89,11 @@ namespace UI
         {
             if (cartList.SelectedItem is not null)
                 presenter.cartAdding(cartList.SelectedItem as Goods, (int)amountInCart.Value);
-            amountInCart.Value = 1;
+        }
+
+        private void CartList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            amountInCart.Value = presenter.goodsCounter(cartList.SelectedItem as Goods);
         }
     }
 }

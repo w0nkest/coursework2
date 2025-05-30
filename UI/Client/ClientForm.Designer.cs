@@ -86,6 +86,7 @@
             cartList.Name = "cartList";
             cartList.Size = new Size(131, 214);
             cartList.TabIndex = 3;
+            cartList.SelectedIndexChanged += CartList_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -155,7 +156,6 @@
             // 
             amountInCart.Location = new Point(345, 141);
             amountInCart.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
-            amountInCart.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             amountInCart.Name = "amountInCart";
             amountInCart.Size = new Size(71, 23);
             amountInCart.TabIndex = 10;

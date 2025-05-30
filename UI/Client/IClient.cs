@@ -20,5 +20,7 @@ namespace UI
         void removeFromCart(Goods goods);
 
         List<Goods> getCart();
+
+        void raiseMsgBox(string msg);
     }
 }

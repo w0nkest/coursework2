@@ -15,8 +15,12 @@ namespace UI
 
         void cartAdding(Goods goods, int amount);
 
-        void calculatePurchaceSum();
+        int calculatePurchaceSum();
 
         void productAdding(Goods goods);
+
+        void loadPaymentForm();
+
+        int goodsCounter(Goods goods);
     }
 }
