@@ -72,7 +72,7 @@ namespace UI
         private void buttonPayment_Click(object sender, EventArgs e)
         {
             presenter.loadPaymentForm();
-        }
+        }   
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {

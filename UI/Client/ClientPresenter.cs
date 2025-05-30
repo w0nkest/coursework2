@@ -39,17 +39,19 @@ namespace UI
             {
                 foreach (var goods in view.getCart())
                 {
-                    if (goods.GetType() == typeof(TimeGoods) && (goods as TimeGoods).Hours > 0)
+                    //Console.WriteLine(goods.GetType());
+                    if (goods.GetType() == typeof(TimeGoods))
                     {
-                        (new PaymentForm()).ShowDialog();
-                        return;
-                    }
-                    else 
-                    {
-                        view.raiseMsgBox("Какие-то товары не были указаны по продолжительности! Перепроверьте список!");
-                        return;
+                        Console.WriteLine("timegood here");
+                        if ((goods as TimeGoods).Hours <= 0)
+                        {
+                            view.raiseMsgBox("Какие-то товары не были указаны по продолжительности! Перепроверьте список!");
+                            return;
+                        }
                     }
                 }
+                (new PaymentForm()).ShowDialog();
+                return;
             }
             else view.raiseMsgBox("Ваших денег не хватает! Удалите товары, чтобы их сумма не превышвала " +
                 $"{client.getBonuses() + client.getCardMoney() + client.getCashMoney()}");
