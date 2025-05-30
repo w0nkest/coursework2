@@ -20,5 +20,13 @@
             this.bankCard = bankCard;
             this.Bonuses = bonus;
         }
+
+        public void addCash(int value) => Cash += value;
+
+        public void withdrawCash(int value)
+        {
+            if (Cash >= value) Cash -= value;
+            else return;
+        }
     }
 }

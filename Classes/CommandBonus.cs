@@ -5,22 +5,23 @@
         private Bonus bonus;
         private int value;
         private DateTime date;
+        private Dictionary<DateTime, int> beforeCommand;
+        private int previousvalue;
 
         public CommandAddBonus(Bonus bonus, DateTime date, int value)
         {
             this.bonus = bonus;
             this.value = value;
+            this.previousvalue = bonus.Amount;
+            this.beforeCommand = new Dictionary<DateTime, int>(bonus.AddingHistory);
         }
 
         public void Execute() => bonus.AddBonuses(date, value);
 
         public void Undo()
         {
-            if (bonus.AddingHistory.TryGetValue(date, out var addedAmount))
-            {
-                bonus.Amount -= addedAmount;
-                bonus.AddingHistory.Remove(date);
-            }
+            bonus.Amount = previousvalue;
+            bonus.AddingHistory = new Dictionary<DateTime, int>(beforeCommand);
         }
     }
 
@@ -28,12 +29,14 @@
     {
         private Bonus bonus;
         private int value;
+        private int previousvalue;
         private Dictionary<DateTime, int> beforeCommand;
 
         public CommandWithdrawBonus(Bonus bonus, int value)
         {
             this.bonus = bonus;
             this.value = value;
+            this.previousvalue = bonus.Amount;
             this.beforeCommand = new Dictionary<DateTime, int>(bonus.AddingHistory);
         }
 
@@ -42,7 +45,7 @@
         public void Undo()
         {
             bonus.AddingHistory = new Dictionary<DateTime, int>(beforeCommand);
-            bonus.Amount -= value;
+            bonus.Amount = previousvalue;
         }
     }
 }
