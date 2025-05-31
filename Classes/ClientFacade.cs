@@ -8,14 +8,14 @@ using System.Xml.Serialization;
 
 namespace Classes
 {
-    public class ShopFacade
+    public class ClientFacade
     {
         private readonly Client client;
         private readonly Wallet wallet;
         private readonly BankCard card;
         private readonly Bonus bonus;
 
-        public ShopFacade(Client client)
+        public ClientFacade(Client client)
         {
             this.client = client;
             wallet = client.wallet;

@@ -52,7 +52,7 @@ namespace UI
                         }
                     }
                 }
-                (new PaymentForm()).ShowDialog();
+                (new PaymentForm(calculatePurchaceSum(), facade, view.getCart())).ShowDialog();
                 return;
             }
             else view.raiseMsgBox("Ваших денег не хватает! Удалите товары, чтобы их сумма не превышвала " +

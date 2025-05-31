@@ -67,6 +67,7 @@ namespace UI
             {
                 cart.Add(good);
             }
+
             return cart;
         }
 
@@ -77,13 +78,12 @@ namespace UI
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            Goods selected = cartList.SelectedItem as Goods;
-            presenter.cartRemoving(selected);
+            if (cartList.SelectedItem is not null) presenter.cartRemoving(cartList.SelectedItem as Goods);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            presenter.cartAdding(goodsList.SelectedItem as Goods);
+            if (goodsList.SelectedItem is not null) presenter.cartAdding(goodsList.SelectedItem as Goods);
         }
 
         private void buttonConfirmValue_Click(object sender, EventArgs e)
