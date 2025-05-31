@@ -41,13 +41,12 @@
             numericUpDownCash = new NumericUpDown();
             numericUpDownBonus = new NumericUpDown();
             buttonPaymentViaParams = new Button();
-            buttonWithdrawBonus = new Button();
-            buttonLeftBonus = new Button();
             buttonPayWithCardOnly = new Button();
             buttonPayWithCashOnly = new Button();
             buttonBack = new Button();
             userInfoToLeft = new RichTextBox();
             label7 = new Label();
+            buttonPayWithBonusOnly = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownCash).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownBonus).BeginInit();
@@ -98,7 +97,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(242, 65);
+            label3.Location = new Point(242, 55);
             label3.Name = "label3";
             label3.Size = new Size(95, 30);
             label3.TabIndex = 15;
@@ -107,7 +106,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(373, 65);
+            label4.Location = new Point(373, 55);
             label4.Name = "label4";
             label4.Size = new Size(117, 30);
             label4.TabIndex = 16;
@@ -116,7 +115,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(502, 65);
+            label5.Location = new Point(502, 55);
             label5.Name = "label5";
             label5.Size = new Size(106, 30);
             label5.TabIndex = 17;
@@ -135,7 +134,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(631, 67);
+            label6.Location = new Point(631, 55);
             label6.Name = "label6";
             label6.Size = new Size(71, 30);
             label6.TabIndex = 19;
@@ -147,7 +146,6 @@
             numericUpDownCard.Name = "numericUpDownCard";
             numericUpDownCard.Size = new Size(95, 23);
             numericUpDownCard.TabIndex = 20;
-            numericUpDownCard.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             numericUpDownCard.ValueChanged += numericCard_Changed;
             // 
             // numericUpDownCash
@@ -175,24 +173,6 @@
             buttonPaymentViaParams.Text = "Оплатить ";
             buttonPaymentViaParams.UseVisualStyleBackColor = true;
             // 
-            // buttonWithdrawBonus
-            // 
-            buttonWithdrawBonus.Location = new Point(502, 127);
-            buttonWithdrawBonus.Name = "buttonWithdrawBonus";
-            buttonWithdrawBonus.Size = new Size(95, 60);
-            buttonWithdrawBonus.TabIndex = 24;
-            buttonWithdrawBonus.Text = "Списать бонусы";
-            buttonWithdrawBonus.UseVisualStyleBackColor = true;
-            // 
-            // buttonLeftBonus
-            // 
-            buttonLeftBonus.Location = new Point(502, 193);
-            buttonLeftBonus.Name = "buttonLeftBonus";
-            buttonLeftBonus.Size = new Size(95, 60);
-            buttonLeftBonus.TabIndex = 25;
-            buttonLeftBonus.Text = "Копить бонусы";
-            buttonLeftBonus.UseVisualStyleBackColor = true;
-            // 
             // buttonPayWithCardOnly
             // 
             buttonPayWithCardOnly.Location = new Point(242, 127);
@@ -207,7 +187,7 @@
             // 
             buttonPayWithCashOnly.Location = new Point(373, 127);
             buttonPayWithCashOnly.Name = "buttonPayWithCashOnly";
-            buttonPayWithCashOnly.Size = new Size(95, 57);
+            buttonPayWithCashOnly.Size = new Size(95, 60);
             buttonPayWithCashOnly.TabIndex = 27;
             buttonPayWithCashOnly.Text = "Полностью оплатить наличными";
             buttonPayWithCashOnly.UseVisualStyleBackColor = true;
@@ -237,25 +217,34 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label7.Location = new Point(11, 225);
+            label7.Location = new Point(11, 216);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.Size = new Size(156, 28);
             label7.TabIndex = 30;
             label7.Text = "У вас останется:";
             // 
+            // buttonPayWithBonusOnly
+            // 
+            buttonPayWithBonusOnly.Location = new Point(502, 127);
+            buttonPayWithBonusOnly.Name = "buttonPayWithBonusOnly";
+            buttonPayWithBonusOnly.Size = new Size(95, 60);
+            buttonPayWithBonusOnly.TabIndex = 31;
+            buttonPayWithBonusOnly.Text = "Полностью оплатить бонусами";
+            buttonPayWithBonusOnly.UseVisualStyleBackColor = true;
+            buttonPayWithBonusOnly.Click += ButtonPayWithBonusOnly_Click;
+            // 
             // PaymentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(756, 365);
+            Controls.Add(buttonPayWithBonusOnly);
             Controls.Add(label7);
             Controls.Add(userInfoToLeft);
             Controls.Add(buttonBack);
             Controls.Add(buttonPayWithCashOnly);
             Controls.Add(buttonPayWithCardOnly);
-            Controls.Add(buttonLeftBonus);
-            Controls.Add(buttonWithdrawBonus);
             Controls.Add(buttonPaymentViaParams);
             Controls.Add(numericUpDownBonus);
             Controls.Add(numericUpDownCash);
@@ -293,12 +282,11 @@
         private NumericUpDown numericUpDownCash;
         private NumericUpDown numericUpDownBonus;
         private Button buttonPaymentViaParams;
-        private Button buttonWithdrawBonus;
-        private Button buttonLeftBonus;
         private Button buttonPayWithCardOnly;
         private Button buttonPayWithCashOnly;
         private Button buttonBack;
         private RichTextBox userInfoToLeft;
         private Label label7;
+        private Button buttonPayWithBonusOnly;
     }
 }

@@ -33,6 +33,11 @@ namespace UI
             presenter = new PaymentPresenter(this, client);
         }
 
+        private void ButtonPayWithBonusOnly_Click(object sender, EventArgs e)
+        {
+            presenter.bonusPayment();
+        }
+
         private void buttonPayWithCashOnly_Click(object sender, EventArgs e)
         {
             presenter.cashPayment();

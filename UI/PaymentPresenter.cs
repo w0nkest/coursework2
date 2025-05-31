@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,10 +12,12 @@ namespace UI
     {
         public IPayment view;
         public ClientFacade facade;
+        private int priority = 1; // 1 - bonus, 2 - card, 3 - cash
 
-        public PaymentPresenter(IPayment view, ClientFacade facade) 
-        { 
-            this.view = view; this.facade = facade;
+        public PaymentPresenter(IPayment view, ClientFacade facade)
+        {
+            this.view = view;
+            this.facade = facade;
 
             calculateSum();
             calculateLeftSum();
@@ -23,8 +26,19 @@ namespace UI
                 $"\nВ кошельке - {facade.GetCash()} руб.\nНа карте - {facade.GetCardMoney()} руб.");
         }
 
+        public void zeroingValues()
+        {
+            view.setBonusSum(0);
+            view.setCardSum(0);
+            view.setCashSum(0);
+            calculateLeftSum();
+        }
+
         public void cardPayment()
         {
+            priority = 2;
+            zeroingValues();
+
             if (facade.GetCardMoney() >= calculateSum())
             {
                 view.setSumLeft("0");
@@ -33,15 +47,20 @@ namespace UI
             else
             {
                 view.setCardSum(facade.GetCardMoney());
+                int left = calculateLeftSum();
 
-                if (calculateLeftSum() == 0) view.raiseMsgBox("Денег на карте не хватило, но доплата была совершена!");
-
-                else view.raiseMsgBox($"Денег на карте не хватило! Доплатите бонусами или наличными! К доплате {calculateLeftSum()}");
+                if (left == 0)
+                    view.raiseMsgBox("Денег на карте не хватило, но доплата была совершена!");
+                else
+                    view.raiseMsgBox($"Денег на карте не хватило! Доплатите бонусами или наличными! К доплате {left}");
             }
         }
 
         public void cashPayment()
         {
+            priority = 3;
+            zeroingValues();
+
             if (facade.GetCash() >= calculateSum())
             {
                 view.setSumLeft("0");
@@ -50,20 +69,45 @@ namespace UI
             else
             {
                 view.setCashSum(facade.GetCash());
-                if (calculateLeftSum() == 0) view.raiseMsgBox($"Наличных не хватило, но доплата была совершена!");
-                else view.raiseMsgBox($"Наличных не хватило! Доплатите бонусами или картой! К доплате {calculateLeftSum()}");
+                int left = calculateLeftSum();
+
+                if (left == 0)
+                    view.raiseMsgBox("Наличных не хватило, но доплата была совершена!");
+                else
+                    view.raiseMsgBox($"Наличных не хватило! Доплатите бонусами или картой! К доплате {left}");
             }
         }
 
-        public void closeTab(Form form) { form.Close(); }
+        public void bonusPayment()
+        {
+            priority = 1;
+            zeroingValues();
+
+            if (facade.GetBonus() >= calculateSum())
+            {
+                view.setSumLeft("0");
+                view.setBonusSum(calculateSum());
+            }
+            else
+            {
+                view.setBonusSum(facade.GetBonus());
+                int left = calculateLeftSum();
+
+                if (left == 0)
+                    view.raiseMsgBox("Бонусов для оплаты недостаточно, но доплата была совершена!");
+                else
+                    view.raiseMsgBox($"Бонусов не хватает! Доплатите картой или наличными! К доплате {left}");
+            }
+        }
+
+        public void closeTab(Form form)
+        {
+            form.Close();
+        }
 
         public int calculateSum()
         {
-            int sum = 0;
-            foreach (Goods good in view.getCart())
-            {
-                sum += good.GetPrice();
-            }
+            int sum = view.getCart().Sum(good => good.GetPrice());
             view.setSum(sum.ToString());
             return sum;
         }
@@ -72,34 +116,84 @@ namespace UI
         {
             int totalsum = calculateSum();
             int numericsum = view.numericValues().Sum();
-            int sum = totalsum - numericsum;
+            int dif = totalsum - numericsum;
 
-            if (sum >= 0)
+            view.setSumLeft("0");
+
+            if (dif >= 0)
             {
-                view.setSumLeft(sum.ToString());
-                return sum;
+                view.setSumLeft(dif.ToString());
+                return dif;
             }
 
-            if (numericsum - view.getBonusValue() < totalsum) 
-            { 
-                view.setBonusSum(Math.Max(0, view.getBonusValue() - (numericsum - totalsum))); 
-                Console.WriteLine("bonus ch"); 
-            }
-            else
+            int availableBonus = facade.GetBonus() - view.getBonusValue();
+            int availableCard = facade.GetCardMoney() - view.getCardValue();
+            int availableCash = facade.GetCash() - view.getCashValue();
+            int remaining = -dif; 
+
+ 
+            if (priority == 1) 
             {
-                if (numericsum - view.getBonusValue() - view.getCardValue() < totalsum) 
-                { 
-                    view.setBonusSum(0); 
-                    view.setCardSum(Math.Max(0, view.getCardValue() - (numericsum - totalsum))); 
-                    Console.WriteLine("bonus 0 card ch"); 
+                view.setCardSum(0);
+                view.setCashSum(0);
+            }
+            else if (priority == 2) 
+            {
+                view.setBonusSum(0);
+                view.setCashSum(0);
+            }
+            else if (priority == 3)
+            {
+                view.setBonusSum(0);
+                view.setCardSum(0);
+            }
+
+            if (priority == 1) 
+            {
+                int cardToUse = Math.Min(availableCard, remaining);
+                view.setCardSum(cardToUse);
+                remaining -= cardToUse;
+
+                if (remaining > 0)
+                {
+                    int cashToUse = Math.Min(availableCash, remaining);
+                    view.setCashSum(cashToUse);
+                    remaining -= cashToUse;
                 }
-                else 
-                { 
-                    view.setBonusSum(0); 
-                    view.setCardSum(0); 
-                    view.setCashSum(Math.Max(0, view.getCashValue() - (numericsum - totalsum))); 
-                    Console.WriteLine("bonus 0 card 0 cash ch"); }
             }
+            else if (priority == 2) 
+            {
+                int bonusToUse = Math.Min(availableBonus, remaining);
+                view.setBonusSum(bonusToUse);
+                remaining -= bonusToUse;
+
+                if (remaining > 0)
+                {
+                    int cashToUse = Math.Min(availableCash, remaining);
+                    view.setCashSum(cashToUse);
+                    remaining -= cashToUse;
+                }
+            }
+            else if (priority == 3) 
+            {
+                int bonusToUse = Math.Min(availableBonus, remaining);
+                view.setBonusSum(bonusToUse);
+                remaining -= bonusToUse;
+
+                if (remaining > 0)
+                {
+                    int cardToUse = Math.Min(availableCard, remaining);
+                    view.setCardSum(cardToUse);
+                    remaining -= cardToUse;
+                }
+            }
+
+            if (remaining > 0)
+            {
+                view.setSumLeft(remaining.ToString());
+                return remaining;
+            }
+
             return 0;
         }
 
