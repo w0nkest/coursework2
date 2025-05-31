@@ -33,6 +33,21 @@ namespace UI
             presenter = new PaymentPresenter(this, client);
         }
 
+        public void setCardMax(int value)
+        {
+            numericUpDownCard.Maximum = value;
+        }
+
+        public void setCashMax(int value)
+        {
+            numericUpDownCash.Maximum = value;
+        }
+
+        public void setBonusMax(int value)
+        {
+            numericUpDownBonus.Maximum = value;
+        }
+
         private void ButtonPayWithBonusOnly_Click(object sender, EventArgs e)
         {
             presenter.bonusPayment();

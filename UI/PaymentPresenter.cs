@@ -115,97 +115,56 @@ namespace UI
         public int calculateLeftSum()
         {
             int totalsum = calculateSum();
-            int numericsum = view.numericValues().Sum();
-            int dif = totalsum - numericsum;
+            int cardValue = view.getCardValue();
+            int cashValue = view.getCashValue();
+            int bonusValue = view.getBonusValue();
+            int currentSum = cardValue + cashValue + bonusValue;
 
-            view.setSumLeft("0");
-
-            if (dif >= 0)
+            if (currentSum > totalsum)
             {
-                view.setSumLeft(dif.ToString());
-                return dif;
-            }
-
-            int availableBonus = facade.GetBonus();
-            int availableCard = facade.GetCardMoney();
-            int availableCash = facade.GetCash();
-            int remaining = -dif; 
-
- 
-            if (priority == 1) 
-            {
-                view.setCardSum(0);
-                view.setCashSum(0);
-            }
-            else if (priority == 2) 
-            {
-                view.setBonusSum(0);
-                view.setCashSum(0);
-            }
-            else if (priority == 3)
-            {
-                view.setBonusSum(0);
-                view.setCardSum(0);
-            }
-            StreamWriter writer = new StreamWriter("file.txt", true);
-            writer.WriteLine();
-            if (priority == 1) 
-            {
-                writer.WriteLine($"priority 1, bonuses used {view.getBonusValue()}");
-                int cardToUse = Math.Min(availableCard, remaining);
-                view.setCardSum(cardToUse);
-                remaining -= cardToUse;
-                writer.WriteLine($"card {view.getCardValue()}");
-
-                if (remaining > 0)
+                if (priority == 1) 
                 {
-                    int cashToUse = Math.Min(availableCash, remaining);
-                    view.setCashSum(cashToUse);
-                    remaining -= cashToUse;
 
-                    writer.WriteLine($"cash {view.getCashValue()}");
+                    bonusValue = Math.Min(bonusValue, totalsum);
+                    view.setBonusSum(bonusValue);
+
+                    int remaining = totalsum - bonusValue;
+                    cardValue = Math.Min(cardValue, remaining);
+                    view.setCardSum(cardValue);
+
+                    cashValue = Math.Min(cashValue, totalsum - bonusValue - cardValue);
+                    view.setCashSum(cashValue);
                 }
-            }
-            else if (priority == 2) 
-            {
-                writer.WriteLine($"priority 2, card used {view.getCardValue()}");
-                int bonusToUse = Math.Min(availableBonus, remaining);
-                view.setBonusSum(bonusToUse);
-                remaining -= bonusToUse;
-                writer.WriteLine($"bonus {view.getBonusValue()}");
-
-                if (remaining > 0)
+                else if (priority == 2)
                 {
-                    int cashToUse = Math.Min(availableCash, remaining);
-                    view.setCashSum(cashToUse);
-                    remaining -= cashToUse;
-                    writer.WriteLine($"cash {view.getCashValue()}");
+                    cardValue = Math.Min(cardValue, totalsum);
+                    view.setCardSum(cardValue);
+
+                    int remaining = totalsum - cardValue;
+                    bonusValue = Math.Min(bonusValue, remaining);
+                    view.setBonusSum(bonusValue);
+
+                    cashValue = Math.Min(cashValue, totalsum - cardValue - bonusValue);
+                    view.setCashSum(cashValue);
                 }
-            }
-            else if (priority == 3) 
-            {
-                writer.WriteLine($"priority 3, cash used {view.getCashValue()}");
-                int bonusToUse = Math.Min(availableBonus, remaining);
-                view.setBonusSum(bonusToUse);
-                remaining -= bonusToUse;
-                writer.WriteLine($"bonus {view.getBonusValue()}");
-
-                if (remaining > 0)
+                else if (priority == 3)
                 {
-                    int cardToUse = Math.Min(availableCard, remaining);
-                    view.setCardSum(cardToUse);
-                    remaining -= cardToUse;
-                    writer.WriteLine($"card {view.getCardValue()}");
+                    cashValue = Math.Min(cashValue, totalsum);
+                    view.setCashSum(cashValue);
+
+                    int remaining = totalsum - cashValue;
+                    bonusValue = Math.Min(bonusValue, remaining);
+                    view.setBonusSum(bonusValue);
+
+                    cardValue = Math.Min(cardValue, totalsum - cashValue - bonusValue);
+                    view.setCardSum(cardValue);
                 }
             }
 
-            if (remaining > 0)
-            {
-                view.setSumLeft(remaining.ToString());
-                return remaining;
-            }
+            int leftToPay = totalsum - (view.getCardValue() + view.getCashValue() + view.getBonusValue());
+            view.setSumLeft(Math.Max(0, leftToPay).ToString());
 
-            return 0;
+            return Math.Max(0, leftToPay);
         }
 
         public void outLeftInfo()
