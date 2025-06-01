@@ -18,7 +18,7 @@
             {
                 foreach (var item in this.AddingHistory)
                 {
-                    if (item.Value > value)
+                    if (item.Value >= value)
                     {
                         this.AddingHistory[item.Key] -= value;
                         break;
@@ -31,7 +31,6 @@
                 }
                 this.Amount -= value;
             }
-            else return;
         }
 
         public void ClearBonuses()

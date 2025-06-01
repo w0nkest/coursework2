@@ -34,11 +34,5 @@ namespace UI
         int getCashValue();
 
         void raiseMsgBox(string msg);
-
-        //void setCardMax(int value);
-
-        //void setCashMax(int value);
-
-        //void setBonusMax(int value);
     }
 }

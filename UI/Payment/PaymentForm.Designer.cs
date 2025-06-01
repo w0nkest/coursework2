@@ -172,6 +172,7 @@
             buttonPaymentViaParams.TabIndex = 23;
             buttonPaymentViaParams.Text = "Оплатить ";
             buttonPaymentViaParams.UseVisualStyleBackColor = true;
+            buttonPaymentViaParams.Click += buttonPaymentViaParams_Click;
             // 
             // buttonPayWithCardOnly
             // 

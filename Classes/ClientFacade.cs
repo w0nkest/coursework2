@@ -39,7 +39,7 @@ namespace Classes
 
         public void AddBonus(DateTime date, int value) => client.ExecuteCommand(new CommandAddBonus(bonus, date, value));
 
-        public void WithdrawBonus(DateTime date, int value) => client.ExecuteCommand(new CommandWithdrawBonus(bonus, value));
+        public void WithdrawBonus(int value) => client.ExecuteCommand(new CommandWithdrawBonus(bonus, value));
 
         public int GetBonus() => client.getBonuses();
     }

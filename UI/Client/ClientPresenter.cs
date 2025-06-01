@@ -37,6 +37,11 @@ namespace UI
 
         public void loadPaymentForm()
         {
+            if (view.getCart().Count == 0)
+            {
+                view.raiseMsgBox("В корзине ничего нет!");
+                return;
+            }
             if (facade.GetCash() + facade.GetCardMoney() + facade.GetBonus() >= calculatePurchaceSum())
             {
                 foreach (var goods in view.getCart())
@@ -53,6 +58,12 @@ namespace UI
                     }
                 }
                 (new PaymentForm(calculatePurchaceSum(), facade, view.getCart())).ShowDialog();
+                foreach (var goods in view.getCart())
+                    cartRemoving(goods);
+
+                view.setUserText($"Клиент - {facade.GetName()}\nКоличество бонусов - {facade.GetBonus()}" +
+                    $"\nВ кошельке - {facade.GetCash()} руб.\nНа карте - {facade.GetCardMoney()} руб.");
+
                 return;
             }
             else view.raiseMsgBox("Ваших денег не хватает! Удалите товары, чтобы их сумма не превышвала " +

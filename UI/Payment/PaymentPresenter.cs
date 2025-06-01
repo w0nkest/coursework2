@@ -175,5 +175,18 @@ namespace UI
                 $"Наличные - {facade.GetCash() - view.getCashValue()}\n" +
                 $"Бонусы - {facade.GetBonus() - view.getBonusValue()}");
         }
+
+        public void paymentProcess()
+        {
+            facade.WithdrawCash(view.getCashValue());
+            facade.WithdrawBonus(view.getBonusValue());
+            facade.WithdrawCardMoney(view.getCardValue());
+
+            Console.WriteLine(view.getBonusValue());
+            Console.WriteLine(calculateSum() - view.getBonusValue());
+            Console.WriteLine(facade.GetBonus());
+
+            facade.AddBonus(DateTime.Now, calculateSum() - view.getBonusValue());
+        }
     }
 }
