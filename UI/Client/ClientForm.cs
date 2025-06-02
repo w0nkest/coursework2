@@ -15,17 +15,10 @@ namespace UI
     {
         ClientPresenter presenter;
         List<Goods> goods;
-        public ClientForm(List<Goods> good)
+        public ClientForm(List<Goods> good, Client client)
         {
             InitializeComponent();
-            Client client = new Client("Mankind");
             ClientFacade f = new ClientFacade(client);
-
-            f.AddCardMoney(1500);
-
-            f.AddBonus(DateTime.Now, 1000);
-
-            f.AddCash(150);
 
             goods = good;
             presenter = new ClientPresenter(this, f, goods);

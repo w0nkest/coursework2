@@ -14,12 +14,14 @@ namespace UI
     public partial class MenuForm : Form
     {
         private List<Goods> goods;
+        private List<Client> clients;
 
-        public MenuForm(List<Goods> good)
+        public MenuForm(List<Client> clients, List<Goods> good)
         {
             InitializeComponent();
 
-            goods = good;
+            this.goods = good;
+            this.clients = clients;
         }
 
         private void openForm(Form form)
@@ -34,7 +36,7 @@ namespace UI
 
         private void buttonClient_Click(object sender, EventArgs e)
         {
-            openForm(new ClientForm(goods));
+            openForm(new ClientChoosingForm(clients, goods));
         }
     }
 }

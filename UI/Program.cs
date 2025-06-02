@@ -1,8 +1,6 @@
 ﻿using Classes;
 using Microsoft.Data.Sqlite;
-using SQLitePCL;
 using System.Globalization;
-using System.Xml.Serialization;
 
 namespace UI
 {
@@ -16,7 +14,7 @@ namespace UI
 
             SQLitePCL.Batteries.Init();
 
-            string pathdb = @"..\..\..\product_database.db";
+            string pathdb = @"..\..\..\Resources\product_database.db";
 
             using (var connection = new SqliteConnection($"Data Source={pathdb}"))
             {
@@ -61,14 +59,11 @@ namespace UI
                         Client c = new Client(reader["name"].ToString(), wallet);
 
                         clientList.Add(c);
-
-                        Console.WriteLine(c);
-                        Console.WriteLine(wallet);
                     }
                 }
             }
 
-            Form menu = new MenuForm(productList);
+            Form menu = new MenuForm(clientList, productList);
             menu.ShowDialog();
         }
 
@@ -110,8 +105,6 @@ namespace UI
                     return b;
                 }
             }
-
-            return null;
         }
     }
 }
