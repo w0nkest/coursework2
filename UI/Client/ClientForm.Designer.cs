@@ -47,17 +47,21 @@
             // 
             // goodsList
             // 
+            goodsList.BackColor = Color.SandyBrown;
+            goodsList.BorderStyle = BorderStyle.None;
             goodsList.FormattingEnabled = true;
             goodsList.Location = new Point(19, 75);
             goodsList.Margin = new Padding(4, 2, 4, 2);
             goodsList.Name = "goodsList";
-            goodsList.Size = new Size(414, 452);
+            goodsList.Size = new Size(414, 448);
             goodsList.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(19, 0);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
@@ -78,18 +82,22 @@
             // 
             // cartList
             // 
+            cartList.BackColor = Color.SandyBrown;
+            cartList.BorderStyle = BorderStyle.None;
             cartList.FormattingEnabled = true;
             cartList.Location = new Point(966, 75);
             cartList.Margin = new Padding(4, 2, 4, 2);
             cartList.Name = "cartList";
-            cartList.Size = new Size(414, 452);
+            cartList.Size = new Size(414, 448);
             cartList.TabIndex = 3;
             cartList.SelectedIndexChanged += CartList_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label2.ForeColor = SystemColors.ButtonHighlight;
             label2.Location = new Point(966, 0);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
@@ -110,6 +118,8 @@
             // 
             // userInfo
             // 
+            userInfo.BackColor = Color.Peru;
+            userInfo.BorderStyle = BorderStyle.None;
             userInfo.Location = new Point(464, 21);
             userInfo.Margin = new Padding(4, 2, 4, 2);
             userInfo.Name = "userInfo";
@@ -121,7 +131,9 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label3.ForeColor = SystemColors.ButtonHighlight;
             label3.Location = new Point(819, 533);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
@@ -131,11 +143,14 @@
             // 
             // purchaceSum
             // 
+            purchaceSum.BackColor = Color.SandyBrown;
+            purchaceSum.BorderStyle = BorderStyle.None;
             purchaceSum.Location = new Point(966, 544);
             purchaceSum.Margin = new Padding(4, 2, 4, 2);
             purchaceSum.Name = "purchaceSum";
             purchaceSum.ReadOnly = true;
-            purchaceSum.Size = new Size(405, 39);
+            purchaceSum.RightToLeft = RightToLeft.Yes;
+            purchaceSum.Size = new Size(405, 32);
             purchaceSum.TabIndex = 8;
             purchaceSum.Text = "0";
             // 
@@ -152,27 +167,32 @@
             // 
             // amountInCart
             // 
+            amountInCart.BorderStyle = BorderStyle.None;
             amountInCart.Location = new Point(773, 294);
-            amountInCart.Margin = new Padding(6, 6, 6, 6);
+            amountInCart.Margin = new Padding(6);
             amountInCart.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
             amountInCart.Name = "amountInCart";
-            amountInCart.Size = new Size(132, 39);
+            amountInCart.Size = new Size(132, 35);
             amountInCart.TabIndex = 10;
             amountInCart.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(771, 224);
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label4.ForeColor = SystemColors.ButtonHighlight;
+            label4.Location = new Point(768, 224);
             label4.Margin = new Padding(6, 0, 6, 0);
             label4.Name = "label4";
-            label4.Size = new Size(148, 64);
+            label4.Size = new Size(157, 64);
             label4.TabIndex = 11;
             label4.Text = "Изменение \r\nколичества";
             // 
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Location = new Point(929, 256);
             label5.Margin = new Padding(6, 0, 6, 0);
             label5.Name = "label5";
@@ -183,7 +203,7 @@
             // buttonConfirmValue
             // 
             buttonConfirmValue.Location = new Point(773, 356);
-            buttonConfirmValue.Margin = new Padding(6, 6, 6, 6);
+            buttonConfirmValue.Margin = new Padding(6);
             buttonConfirmValue.Name = "buttonConfirmValue";
             buttonConfirmValue.Size = new Size(132, 49);
             buttonConfirmValue.TabIndex = 13;
@@ -195,6 +215,8 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.banya1;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1406, 668);
             Controls.Add(buttonConfirmValue);
             Controls.Add(label5);
@@ -210,6 +232,7 @@
             Controls.Add(buttonAdd);
             Controls.Add(label1);
             Controls.Add(goodsList);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 2, 4, 2);
             Name = "ClientForm";
             Text = "ClientForm";

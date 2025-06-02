@@ -36,16 +36,19 @@
             // 
             // clientList
             // 
+            clientList.BorderStyle = BorderStyle.None;
             clientList.FormattingEnabled = true;
             clientList.Location = new Point(13, 85);
             clientList.Name = "clientList";
-            clientList.Size = new Size(240, 324);
+            clientList.Size = new Size(240, 320);
             clientList.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(13, 9);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
@@ -77,6 +80,8 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.banya6;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(452, 417);
             Controls.Add(buttonNotExist);
             Controls.Add(buttonSelect);
