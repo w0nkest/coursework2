@@ -41,6 +41,11 @@ namespace UI
                 view.raiseMsgBox("Какое-то значение не было введено!");
                 return;
             }
+            if (Convert.ToInt32(newprice) <= 0)
+            {
+                view.raiseMsgBox("Цена не может быть установлена 0 или меньше!");
+                return;
+            }
 
             Goods newgood;
 
@@ -57,6 +62,8 @@ namespace UI
             goods[goods.IndexOf(good)] = newgood;
 
             view.productListUpdate(good, newgood);
+
+            view.setInfoText($"Продукт {good} был изменен! Теперь он - {newgood}");
         }
 
         public void createProduct(string newname, string newprice, bool isTime)
@@ -66,18 +73,28 @@ namespace UI
                 view.raiseMsgBox("Какое-то значение не было введено!");
                 return;
             }
+
+            if (Convert.ToInt32(newprice) <= 0)
+            {
+                view.raiseMsgBox("Цена не может быть установлена 0 или меньше!");
+                return;
+            }
+
+            Goods good;
+
             if (isTime)
             {
-                TimeGoods good = new TimeGoods(newname, Convert.ToInt32(newprice));
-                view.productListAdd(good);
-                goods.Add(good);
+                good = new TimeGoods(newname, Convert.ToInt32(newprice));
             }
             else
             {
-                SingleGoods good = new SingleGoods(newname, Convert.ToInt32(newprice));
-                view.productListAdd(good);
-                goods.Add(good);
+                good = new SingleGoods(newname, Convert.ToInt32(newprice));
             }
+
+            view.productListAdd(good);
+            goods.Add(good);
+
+            view.setInfoText($"Продукт {good} был создан!");
         }
 
         public void removeProduct(Goods good)
@@ -89,6 +106,8 @@ namespace UI
             }
             view.productListRemove(good);
             goods.Remove(good);
+
+            view.setInfoText($"Продукт {good} был удален!");
         }
     }
 }

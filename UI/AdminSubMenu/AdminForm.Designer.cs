@@ -34,34 +34,43 @@
             // 
             // buttonAdminClient
             // 
-            buttonAdminClient.Location = new Point(70, 50);
-            buttonAdminClient.Margin = new Padding(5);
+            buttonAdminClient.BackColor = Color.Transparent;
+            buttonAdminClient.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            buttonAdminClient.ForeColor = Color.White;
+            buttonAdminClient.Location = new Point(12, 30);
+            buttonAdminClient.Margin = new Padding(3, 2, 3, 2);
             buttonAdminClient.Name = "buttonAdminClient";
-            buttonAdminClient.Size = new Size(270, 90);
+            buttonAdminClient.Size = new Size(163, 42);
             buttonAdminClient.TabIndex = 0;
             buttonAdminClient.Text = "Администрирование клиетов";
-            buttonAdminClient.UseVisualStyleBackColor = true;
+            buttonAdminClient.UseVisualStyleBackColor = false;
             buttonAdminClient.Click += buttonAdminClient_Click;
             // 
             // buttonAdminProduct
             // 
-            buttonAdminProduct.Location = new Point(70, 180);
-            buttonAdminProduct.Margin = new Padding(5);
+            buttonAdminProduct.BackColor = Color.Transparent;
+            buttonAdminProduct.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            buttonAdminProduct.ForeColor = Color.White;
+            buttonAdminProduct.Location = new Point(12, 94);
+            buttonAdminProduct.Margin = new Padding(3, 2, 3, 2);
             buttonAdminProduct.Name = "buttonAdminProduct";
-            buttonAdminProduct.Size = new Size(270, 90);
+            buttonAdminProduct.Size = new Size(163, 42);
             buttonAdminProduct.TabIndex = 1;
             buttonAdminProduct.Text = "Администрирование продуктов";
-            buttonAdminProduct.UseVisualStyleBackColor = true;
+            buttonAdminProduct.UseVisualStyleBackColor = false;
             buttonAdminProduct.Click += buttonAdminProduct_Click;
             // 
-            // Admin
+            // AdminForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(409, 329);
+            BackgroundImage = Properties.Resources.banya8;
+            BackgroundImageLayout = ImageLayout.Center;
+            ClientSize = new Size(260, 159);
             Controls.Add(buttonAdminProduct);
             Controls.Add(buttonAdminClient);
-            Name = "Admin";
+            Margin = new Padding(2, 1, 2, 1);
+            Name = "AdminForm";
             Text = "Admin";
             ResumeLayout(false);
         }

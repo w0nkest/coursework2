@@ -44,6 +44,7 @@
             // 
             // productList
             // 
+            productList.BackColor = Color.SaddleBrown;
             productList.BorderStyle = BorderStyle.None;
             productList.FormattingEnabled = true;
             productList.ItemHeight = 15;
@@ -55,6 +56,7 @@
             // 
             // textBoxName
             // 
+            textBoxName.BackColor = Color.Chocolate;
             textBoxName.BorderStyle = BorderStyle.None;
             textBoxName.Location = new Point(241, 32);
             textBoxName.Name = "textBoxName";
@@ -63,6 +65,7 @@
             // 
             // textBoxPrice
             // 
+            textBoxPrice.BackColor = Color.Chocolate;
             textBoxPrice.BorderStyle = BorderStyle.None;
             textBoxPrice.Location = new Point(347, 32);
             textBoxPrice.Name = "textBoxPrice";
@@ -72,8 +75,10 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(241, 12);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(241, 9);
             label1.Name = "label1";
             label1.Size = new Size(68, 17);
             label1.TabIndex = 3;
@@ -82,8 +87,10 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label2.Location = new Point(347, 12);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(347, 9);
             label2.Name = "label2";
             label2.Size = new Size(40, 17);
             label2.TabIndex = 4;
@@ -101,6 +108,8 @@
             // 
             // info
             // 
+            info.BackColor = Color.SaddleBrown;
+            info.BorderStyle = BorderStyle.FixedSingle;
             info.Location = new Point(241, 148);
             info.Name = "info";
             info.ReadOnly = true;
@@ -131,28 +140,37 @@
             // isTime
             // 
             isTime.AutoSize = true;
+            isTime.BackColor = Color.Transparent;
+            isTime.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            isTime.ForeColor = Color.White;
             isTime.Location = new Point(258, 105);
             isTime.Name = "isTime";
-            isTime.Size = new Size(83, 34);
+            isTime.Size = new Size(91, 38);
             isTime.TabIndex = 9;
             isTime.Text = "Услуга по \r\nвремени";
-            isTime.UseVisualStyleBackColor = true;
+            isTime.UseVisualStyleBackColor = false;
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label3.ForeColor = Color.White;
             label3.Location = new Point(386, 105);
             label3.Name = "label3";
-            label3.Size = new Size(138, 30);
+            label3.Size = new Size(162, 34);
             label3.TabIndex = 10;
             label3.Text = "Используется только \r\nпри добавления нового";
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label4.ForeColor = Color.White;
             label4.Location = new Point(365, 114);
             label4.Name = "label4";
-            label4.Size = new Size(15, 15);
+            label4.Size = new Size(17, 17);
             label4.TabIndex = 11;
             label4.Text = "<";
             // 
@@ -160,6 +178,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.banya7;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(558, 233);
             Controls.Add(label4);
             Controls.Add(label3);
