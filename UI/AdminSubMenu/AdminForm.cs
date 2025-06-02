@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,15 @@ namespace UI
 {
     public partial class AdminForm : Form
     {
-        public AdminForm()
+        private List<Goods> goods;
+        private List<Client> clients;
+
+        public AdminForm(List<Goods> goods, List<Client> clients)
         {
             InitializeComponent();
-        }
 
-        private void openForm(Form form)
-        {
-            form.ShowDialog();
+            this.goods = goods;
+            this.clients = clients;
         }
 
         private void buttonAdminClient_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace UI
 
         private void buttonAdminProduct_Click(object sender, EventArgs e)
         {
-            //openForm();
+            new AdminProductForm(goods).ShowDialog();
         }
     }
 }

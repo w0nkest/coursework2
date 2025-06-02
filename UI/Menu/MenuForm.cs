@@ -31,7 +31,7 @@ namespace UI
 
         private void buttonAdministration_Click(object sender, EventArgs e)
         {
-            openForm(new AdminForm());
+            openForm(new AdminForm(goods, clients));
         }
 
         private void buttonClient_Click(object sender, EventArgs e)
