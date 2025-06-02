@@ -28,5 +28,10 @@
             if (Cash >= value) Cash -= value;
             else return;
         }
+
+        public override string ToString()
+        {
+            return $"{bankCard.Number}, {Bonuses.Amount}, {Cash}";
+        }
     }
 }

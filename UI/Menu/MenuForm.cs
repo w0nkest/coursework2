@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Classes;
 
 namespace UI
 {
     public partial class MenuForm : Form
     {
-        public MenuForm()
+        private List<Goods> goods;
+
+        public MenuForm(List<Goods> good)
         {
             InitializeComponent();
+
+            goods = good;
         }
 
         private void openForm(Form form)
@@ -29,7 +34,7 @@ namespace UI
 
         private void buttonClient_Click(object sender, EventArgs e)
         {
-            openForm(new ClientForm());
+            openForm(new ClientForm(goods));
         }
     }
 }

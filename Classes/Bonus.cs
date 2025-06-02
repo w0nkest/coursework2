@@ -4,7 +4,7 @@
     {
         public int Amount { get; set; } = 0;
 
-        internal Dictionary<DateTime, int> AddingHistory = new Dictionary<DateTime, int>();
+        public Dictionary<DateTime, int> AddingHistory = new Dictionary<DateTime, int>();
 
         public void AddBonuses(DateTime date, int moneySpend)
         {
@@ -31,6 +31,14 @@
                 }
                 this.Amount -= value;
             }
+        }
+
+        public void RecalculateBonuses()
+        {
+            ClearBonuses();
+            Amount = 0;
+            foreach (var value in AddingHistory.Values)
+                Amount += value;
         }
 
         public void ClearBonuses()

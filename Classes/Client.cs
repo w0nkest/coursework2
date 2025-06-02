@@ -27,5 +27,10 @@
         public void ExecuteCommand(ICommand command) => command.Execute();
 
         public void UndoCommand(ICommand command) => command.Undo();
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

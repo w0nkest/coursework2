@@ -12,11 +12,13 @@ namespace UI
     {
         public IClient view;
         public ClientFacade facade;
+        List<Goods> goods;
 
-        public ClientPresenter(IClient view, ClientFacade facade)
+        public ClientPresenter(IClient view, ClientFacade facade, List<Goods> goods)
         {
             this.view = view;
             this.facade = facade;
+            this.goods = goods;
 
             initializeGoods();
 
@@ -26,13 +28,10 @@ namespace UI
 
         public void initializeGoods()
         {
-            Goods goods = new SingleGoods("Дубовый веник", 100);
-
-            productAdding(goods);
-
-            Goods goods2 = new TimeGoods("Баня 500руб/час", 500);
-
-            productAdding(goods2);
+            foreach (var good in goods)
+            {
+                productAdding(good); ;
+            }
         }
 
         public void loadPaymentForm()

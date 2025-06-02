@@ -14,8 +14,8 @@ namespace UI
     public partial class ClientForm : Form, IClient
     {
         ClientPresenter presenter;
-
-        public ClientForm()
+        List<Goods> goods;
+        public ClientForm(List<Goods> good)
         {
             InitializeComponent();
             Client client = new Client("Mankind");
@@ -27,7 +27,8 @@ namespace UI
 
             f.AddCash(150);
 
-            presenter = new ClientPresenter(this, f);
+            goods = good;
+            presenter = new ClientPresenter(this, f, goods);
         }
 
         public void raiseMsgBox(string msg)
