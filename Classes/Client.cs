@@ -2,6 +2,10 @@
 {
     public class Client
     {
+        public int ID;
+
+        public static int prevID = 0;
+
         public string Name { get; set; }
 
         public Wallet wallet { get; set; }
@@ -14,6 +18,9 @@
 
         public Client(string name, Wallet wallet)
         {
+            ID = prevID++;
+            prevID = ID;
+
             this.Name = name;
             this.wallet = wallet;
         }

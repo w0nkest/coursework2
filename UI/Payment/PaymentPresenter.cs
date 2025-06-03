@@ -1,10 +1,9 @@
 ﻿using Classes;
+using Microsoft.Data.Sqlite;
+using SQLitePCL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.Security.Cryptography;
 
 namespace UI
 {
@@ -13,6 +12,8 @@ namespace UI
         public IPayment view;
         public ClientFacade facade;
         private int priority = 1; // 1 - bonus, 2 - card, 3 - cash
+        private int bonuscarrier;
+        private string bonuswritten;
 
         public PaymentPresenter(IPayment view, ClientFacade facade)
         {
@@ -176,17 +177,133 @@ namespace UI
                 $"Бонусы - {facade.GetBonus() - view.getBonusValue()}");
         }
 
-        public void paymentProcess()
+        public void paymentProcess(Form frm)
         {
+            if (calculateLeftSum() > 0)
+            {
+                view.raiseMsgBox("Сумма не была набрана!");
+                return;
+            }
+
+            // Снимаем средства
             facade.WithdrawCash(view.getCashValue());
             facade.WithdrawBonus(view.getBonusValue());
             facade.WithdrawCardMoney(view.getCardValue());
 
-            Console.WriteLine(view.getBonusValue());
-            Console.WriteLine(calculateSum() - view.getBonusValue());
-            Console.WriteLine(facade.GetBonus());
+            // Начисляем бонусы (10% от суммы, оплаченной не бонусами)
+            int moneyForBonus = calculateSum() - view.getBonusValue();
+            if (moneyForBonus > 0)
+            {
+                // Добавляем бонусы в историю (уже с учетом 10%)
+                facade.AddBonus(DateTime.Now, moneyForBonus);
+            }
 
-            facade.AddBonus(DateTime.Now, calculateSum() - view.getBonusValue());
+            // Сохраняем изменения в БД
+            changeCard();
+            changeCash();
+            changeBonus();
+
+            closeTab(frm);
+        }
+
+        private void changeCard()
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            int cardid = facade.IDs()["bID"];
+
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var command = connection.CreateCommand())
+                        {
+                            command.CommandText = $"UPDATE bankcards SET money = {facade.GetCardMoney()} WHERE ID = {cardid}";
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        private void changeCash()
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            int cid = facade.IDs()["cID"];
+
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var command = connection.CreateCommand())
+                        {
+                            command.CommandText = $"UPDATE clients SET cash = {facade.GetCash()} WHERE ID = {cid}";
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        private void changeBonus()
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            int cid = facade.IDs()["cID"];
+
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Очищаем все старые записи бонусов для этого клиента
+                        using (var command = connection.CreateCommand())
+                        {
+                            command.CommandText = $"DELETE FROM bonus_transaction WHERE bonus = {cid}";
+                            command.ExecuteNonQuery();
+                        }
+
+                        // 2. Добавляем все текущие бонусы из истории
+                        foreach (var entry in facade.GetWallet().Bonuses.AddingHistory)
+                        {
+                            using (var command = connection.CreateCommand())
+                            {
+                                // Сохраняем уже вычисленные бонусы (entry.Value)
+                                command.CommandText = $"INSERT INTO bonus_transaction (bonus, value, datetime) " +
+                                                    $"VALUES ({cid}, {entry.Value * 10}, '{entry.Key}')";
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                        Console.WriteLine("Bonus data updated successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error in changeBonus: {ex.Message}");
+                        transaction.Rollback();
+                    }
+                }
+            }
         }
     }
 }

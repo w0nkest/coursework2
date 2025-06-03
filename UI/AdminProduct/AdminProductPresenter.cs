@@ -1,7 +1,11 @@
 ﻿using Classes;
+using Microsoft.Data.Sqlite;
+using SQLitePCL;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,9 +63,13 @@ namespace UI
                 newgood = new SingleGoods(newname, Convert.ToInt32(newprice));
             }
 
+            newgood.ID = good.ID;
+
             goods[goods.IndexOf(good)] = newgood;
 
             view.productListUpdate(good, newgood);
+
+            productUpdating(newgood);
 
             view.setInfoText($"Продукт {good} был изменен! Теперь он - {newgood}");
         }
@@ -94,6 +102,8 @@ namespace UI
             view.productListAdd(good);
             goods.Add(good);
 
+            newProductAdding(good);
+
             view.setInfoText($"Продукт {good} был создан!");
         }
 
@@ -107,7 +117,106 @@ namespace UI
             view.productListRemove(good);
             goods.Remove(good);
 
+            productDeleting(good);
+
             view.setInfoText($"Продукт {good} был удален!");
+        }
+
+        private void newProductAdding(Goods good)
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var command = connection.CreateCommand())
+                        {
+                            if (typeof(TimeGoods) == good.GetType())
+                            {
+                                command.CommandText = "INSERT INTO time_products (product, price_per_hour)" +
+                                    $"VALUES ('{good.Name}', {good.GetPrice()})";
+                            }
+                            else
+                            {
+                                command.CommandText = "INSERT INTO single_products (product, price)" +
+                                    $"VALUES ('{good.Name}', {good.GetPrice()})";
+                            }
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        private void productDeleting(Goods good)
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var command = connection.CreateCommand())
+                        {
+                            if (typeof(TimeGoods) == good.GetType())
+                            {
+                                command.CommandText = $"DELETE FROM time_products WHERE ID = {good.ID}";
+                            }
+                            else command.CommandText = $"DELETE FROM single_products WHERE ID = {good.ID}";
+
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        private void productUpdating(Goods good)
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var command = connection.CreateCommand())
+                        {
+                            if (typeof(TimeGoods) == good.GetType())
+                            { 
+                                command.CommandText = $"UPDATE time_products SET product = '{good.Name}', price_per_hour = {good.Price} WHERE ID = {good.ID}";
+                            }
+                            else command.CommandText = $"UPDATE single_products SET product = '{good.Name}', price = {good.GetPrice()} WHERE ID = {good.ID}";
+
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
         }
     }
 }

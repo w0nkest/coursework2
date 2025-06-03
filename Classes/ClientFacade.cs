@@ -23,6 +23,16 @@ namespace Classes
             bonus = wallet.Bonuses;
         }
 
+        public Wallet GetWallet()
+        {
+            return wallet;
+        }
+
+        public Dictionary<string, int> IDs()
+        {
+            return new Dictionary<string, int> { { "cID", client.ID }, { "bID", card.ID} };
+        }
+
         public string GetName() => client.Name;
 
         public void AddCardMoney(int value) => client.ExecuteCommand(new CommandAddCard(card, value));

@@ -24,6 +24,6 @@ namespace UI
 
         public void outLeftInfo();
 
-        public void paymentProcess();
+        public void paymentProcess(Form frm);
     }
 }

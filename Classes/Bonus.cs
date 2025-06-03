@@ -1,58 +1,79 @@
-﻿namespace Classes
+﻿using System.Globalization;
+
+namespace Classes
 {
     public class Bonus
     {
-        public int Amount { get; set; } = 0;
-
-        public Dictionary<DateTime, int> AddingHistory = new Dictionary<DateTime, int>();
+        public int Amount { get; set; }
+        public Dictionary<string, int> AddingHistory = new Dictionary<string, int>();
 
         public void AddBonuses(DateTime date, int moneySpend)
         {
-            this.AddingHistory[date] = (int)(moneySpend * 0.1);
-            this.Amount += (int)(moneySpend * 0.1);
-        }
-
-        public void WithdrawBonuses(int value)
-        {
-            if (this.Amount >= value)
+            if (date == DateTime.MinValue)
             {
-                foreach (var item in this.AddingHistory)
-                {
-                    if (item.Value >= value)
-                    {
-                        this.AddingHistory[item.Key] -= value;
-                        break;
-                    }
-                    else
-                    {
-                        value -= item.Value;
-                        this.AddingHistory.Remove(item.Key);
-                    }
-                }
-                this.Amount -= value;
+                date = DateTime.Now;
             }
+
+            int bonus = (int)(moneySpend * 0.1);
+            string dateKey = date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+            while (AddingHistory.ContainsKey(dateKey))
+            {
+                date = date.AddMilliseconds(1);
+                dateKey = date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+            }
+
+            AddingHistory[dateKey] = bonus;
+            Amount += bonus;
         }
 
-        public void RecalculateBonuses()
+        public void WithdrawBonuses(int amountToWithdraw)
         {
-            ClearBonuses();
-            Amount = 0;
-            foreach (var value in AddingHistory.Values)
-                Amount += value;
+            if (amountToWithdraw <= 0 || Amount < amountToWithdraw)
+                return;
+
+            var sortedEntries = AddingHistory
+                .OrderBy(x => DateTime.ParseExact(x.Key, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture))
+                .ToList();
+
+            int remainingToWithdraw = amountToWithdraw;
+
+            foreach (var entry in sortedEntries)
+            {
+                if (remainingToWithdraw <= 0) break;
+
+                int bonusInEntry = entry.Value;
+                if (bonusInEntry == 0) continue;
+
+                if (bonusInEntry >= remainingToWithdraw)
+                {
+                    AddingHistory[entry.Key] = bonusInEntry - remainingToWithdraw;
+                    Amount -= remainingToWithdraw;
+                    remainingToWithdraw = 0;
+                }
+                else
+                {
+                    AddingHistory[entry.Key] = 0;
+                    Amount -= bonusInEntry;
+                    remainingToWithdraw -= bonusInEntry;
+                }
+            }
+
+            var zeroEntries = AddingHistory.Where(x => x.Value == 0).ToList();
+            foreach (var entry in zeroEntries)
+            {
+                AddingHistory.Remove(entry.Key);
+            }
         }
 
         public void ClearBonuses()
         {
-            int period = 3;     // Time in days of bonuses existing
+            var expiredEntries = AddingHistory.Where(x => DateTime.ParseExact(x.Key.Split('.')[0], "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) < DateTime.Now.AddDays(-3)).ToList();
 
-            foreach (var item in this.AddingHistory)
+            foreach (var entry in expiredEntries)
             {
-                if (item.Key.AddDays(period) < DateTime.Now)
-                {
-                    Amount -= item.Value;
-                    this.AddingHistory.Remove(item.Key);
-                }
-                else return;
+                Amount -= entry.Value;
+                AddingHistory.Remove(entry.Key);
             }
         }
     }

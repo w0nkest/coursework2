@@ -35,8 +35,7 @@ namespace UI
 
         private void buttonPaymentViaParams_Click(object sender, EventArgs e)
         {
-            presenter.paymentProcess();
-            presenter.closeTab(this);
+            presenter.paymentProcess(this);
         }
 
         private void ButtonPayWithBonusOnly_Click(object sender, EventArgs e)

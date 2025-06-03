@@ -2,17 +2,22 @@
 {
     public class BankCard
     {
+        public int ID;
 
+        public static int prevID = 0;
         public string Bank { get; set; }
 
         public readonly string Number;
 
-        protected readonly string CVC;
+        public readonly string CVC;
 
         public int Money { get; set; }
 
         public BankCard(string _bank)
         {
+            ID = prevID++;
+            prevID = ID;
+
             this.Bank = _bank;
             NumberGenerator(4, 4, out this.Number);
             NumberGenerator(1, 3, out this.CVC);

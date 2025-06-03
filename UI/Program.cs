@@ -28,7 +28,9 @@ namespace UI
                 {
                     while (reader.Read())
                     {
-                        productList.Add(new SingleGoods(reader["product"].ToString(), Convert.ToInt32(reader["price"])));
+                        Goods good = new SingleGoods(reader["product"].ToString(), Convert.ToInt32(reader["price"]));
+                        good.ID = Convert.ToInt32(reader["ID"]);
+                        productList.Add(good);
                     }
                 }
 
@@ -39,7 +41,9 @@ namespace UI
                 {
                     while (reader.Read())
                     {
-                        productList.Add(new TimeGoods(reader["product"].ToString(), Convert.ToInt32(reader["price_per_hour"])));
+                        Goods good = new TimeGoods(reader["product"].ToString(), Convert.ToInt32(reader["price_per_hour"]));
+                        good.ID = Convert.ToInt32(reader["ID"]);
+                        productList.Add(good);
                     }
                 }
 
@@ -57,6 +61,7 @@ namespace UI
                         wallet.Cash = Convert.ToInt32(reader["cash"]);
 
                         Client c = new Client(reader["name"].ToString(), wallet);
+                        c.ID = Convert.ToInt32(reader["ID"]);
 
                         ClientFacade f = new ClientFacade(c);
 
@@ -80,6 +85,8 @@ namespace UI
                     {
                         BankCard c = new BankCard(reader["bank_name"].ToString(), reader["number"].ToString(), reader["cvc"].ToString());
                         c.Money = Convert.ToInt32(reader["money"]);
+
+                        c.ID = Convert.ToInt32(reader["ID"]);
 
                         return c;
                     }

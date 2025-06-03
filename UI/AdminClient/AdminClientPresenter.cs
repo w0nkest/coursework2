@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Classes;
+using Microsoft.Data.Sqlite;
+using SQLitePCL;
 
 namespace UI
 {
@@ -44,6 +47,7 @@ namespace UI
                 view.textBoxNameSet("");
                 view.textBoxCardSet("");
                 view.textBoxCashSet("");
+                clientDeleting(client);
             }
             else view.raiseMsgBox("Клиент не выбран");
         }
@@ -56,6 +60,8 @@ namespace UI
             {
                 ClientFacade c = new ClientFacade(new Client(name));
                 view.clientListAdd(c);
+
+                newClientAdding(c);
             }
         }
 
@@ -81,6 +87,7 @@ namespace UI
                     view.raiseMsgBox("Значние для транзакции не может быть нулевым или отрицательным!");
                 }
                 view.textBoxCardSet(client.GetCardMoney().ToString());
+                clientUpdating(client);
             }
             else view.raiseMsgBox("Клиент не выбран!");
         }
@@ -107,8 +114,140 @@ namespace UI
                     view.raiseMsgBox("Значние для транзакции не может быть нулевым или отрицательным!");
                 }
                 view.textBoxCashSet(client.GetCash().ToString());
+                clientUpdating(client);
             }
             else view.raiseMsgBox("Клиент не выбран!");
+        }
+
+        private void newClientAdding(ClientFacade client)
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        int cardID = bankCardAddSQL(client, connection);
+
+                        using (var command = connection.CreateCommand())
+                        {
+                            command.CommandText = "INSERT INTO clients (name, card_id, cash)" +
+                                $"VALUES ('{client.GetName()}', {cardID}, {client.GetCash()})";
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                    }
+                    catch
+                    { 
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        private int bankCardAddSQL(ClientFacade c, SqliteConnection con)
+        {
+            using (var command = con.CreateCommand())
+            {
+                Wallet w = c.GetWallet();
+
+                command.CommandText = "INSERT INTO bankcards (bank_name, number, cvc, money)" +
+                    $"VALUES ('{w.bankCard.Bank}', '{w.bankCard.Number}', '{w.bankCard.CVC}', {w.bankCard.Money});" +
+                    $"SELECT last_insert_rowid();";
+
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+        }
+
+        private void clientDeleting(ClientFacade client)
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            int cid = client.IDs()["cID"];
+
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        int cardid = -1;
+                        using (var searchcard = connection.CreateCommand())
+                        {
+                            searchcard.CommandText = $"SELECT card_id FROM clients WHERE ID = {cid}";
+                            var result = searchcard.ExecuteScalar();
+                            cardid = Convert.ToInt32(result);
+                        }
+
+                        using (var deletebonus = connection.CreateCommand())
+                        {
+                            deletebonus.CommandText = $"DELETE FROM bonus_transaction WHERE bonus = {cid}";
+                            deletebonus.ExecuteNonQuery();
+                        }
+
+                        using (var deleteclient = connection.CreateCommand())
+                        {
+                            deleteclient.CommandText = $"DELETE FROM clients WHERE ID = {cid}";
+                            int rowsAffected = deleteclient.ExecuteNonQuery();
+                        }
+
+                        if (cardid != -1)
+                        {
+                            using (var deletecard = connection.CreateCommand())
+                            {
+                                deletecard.CommandText = $"DELETE FROM bankcards WHERE ID = {cardid}";
+                                deletecard.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        private void clientUpdating(ClientFacade client)
+        {
+            Batteries.Init();
+            string pathdb = @"..\..\..\Resources\product_database.db";
+            int cid = client.IDs()["cID"];
+            int cardId = client.IDs()["bID"];
+
+            using (var connection = new SqliteConnection($"Data Source={pathdb}"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var updateClient = connection.CreateCommand())
+                        {
+                            updateClient.CommandText = $"UPDATE clients SET name = '{client.GetName()}', cash = {client.GetCash()} WHERE ID = {cid}";
+                            updateClient.ExecuteNonQuery();
+                        }
+
+                        using (var updateCard = connection.CreateCommand())
+                        {
+                            updateCard.CommandText = $"UPDATE bankcards SET money = {client.GetCardMoney()} WHERE ID = {cardId}";
+                            updateCard.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
         }
     }
 }
