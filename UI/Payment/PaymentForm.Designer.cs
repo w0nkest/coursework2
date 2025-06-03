@@ -58,10 +58,10 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(20, 19);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(11, 9);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(150, 57);
+            label1.Size = new Size(74, 28);
             label1.TabIndex = 5;
             label1.Text = "Сумма:";
             // 
@@ -69,11 +69,11 @@
             // 
             purchaceSum.BackColor = Color.Peru;
             purchaceSum.BorderStyle = BorderStyle.None;
-            purchaceSum.Location = new Point(165, 30);
-            purchaceSum.Margin = new Padding(4, 2, 4, 2);
+            purchaceSum.Location = new Point(89, 14);
+            purchaceSum.Margin = new Padding(2, 1, 2, 1);
             purchaceSum.Name = "purchaceSum";
             purchaceSum.ReadOnly = true;
-            purchaceSum.Size = new Size(240, 32);
+            purchaceSum.Size = new Size(129, 16);
             purchaceSum.TabIndex = 9;
             purchaceSum.Text = "0";
             // 
@@ -83,10 +83,10 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(20, 143);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(11, 67);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(227, 57);
+            label2.Size = new Size(112, 28);
             label2.TabIndex = 10;
             label2.Text = "Ваш баланс:";
             // 
@@ -94,11 +94,11 @@
             // 
             userInfo.BackColor = Color.Peru;
             userInfo.BorderStyle = BorderStyle.None;
-            userInfo.Location = new Point(20, 205);
-            userInfo.Margin = new Padding(4, 2, 4, 2);
+            userInfo.Location = new Point(11, 96);
+            userInfo.Margin = new Padding(2, 1, 2, 1);
             userInfo.Name = "userInfo";
             userInfo.ReadOnly = true;
-            userInfo.Size = new Size(385, 215);
+            userInfo.Size = new Size(207, 101);
             userInfo.TabIndex = 11;
             userInfo.Text = "";
             // 
@@ -108,10 +108,9 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(449, 117);
-            label3.Margin = new Padding(6, 0, 6, 0);
+            label3.Location = new Point(242, 55);
             label3.Name = "label3";
-            label3.Size = new Size(194, 64);
+            label3.Size = new Size(96, 30);
             label3.TabIndex = 15;
             label3.Text = "Укажите сумму \r\nоплаты картой";
             // 
@@ -121,10 +120,9 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(693, 117);
-            label4.Margin = new Padding(6, 0, 6, 0);
+            label4.Location = new Point(373, 55);
             label4.Name = "label4";
-            label4.Size = new Size(235, 64);
+            label4.Size = new Size(117, 30);
             label4.TabIndex = 16;
             label4.Text = "Укажите сумму \r\nоплаты наличными";
             // 
@@ -134,21 +132,20 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             label5.ForeColor = SystemColors.ButtonHighlight;
-            label5.Location = new Point(932, 117);
-            label5.Margin = new Padding(6, 0, 6, 0);
+            label5.Location = new Point(502, 55);
             label5.Name = "label5";
-            label5.Size = new Size(213, 64);
+            label5.Size = new Size(106, 30);
             label5.TabIndex = 17;
             label5.Text = "Укажите сумму \r\nоплаты бонусами";
             // 
             // textBoxLefttoPay
             // 
             textBoxLefttoPay.BorderStyle = BorderStyle.None;
-            textBoxLefttoPay.Location = new Point(1172, 205);
-            textBoxLefttoPay.Margin = new Padding(4, 2, 4, 2);
+            textBoxLefttoPay.Location = new Point(631, 96);
+            textBoxLefttoPay.Margin = new Padding(2, 1, 2, 1);
             textBoxLefttoPay.Name = "textBoxLefttoPay";
             textBoxLefttoPay.ReadOnly = true;
-            textBoxLefttoPay.Size = new Size(182, 32);
+            textBoxLefttoPay.Size = new Size(98, 16);
             textBoxLefttoPay.TabIndex = 18;
             textBoxLefttoPay.Text = "0";
             // 
@@ -158,49 +155,44 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             label6.ForeColor = SystemColors.ButtonHighlight;
-            label6.Location = new Point(1172, 117);
-            label6.Margin = new Padding(6, 0, 6, 0);
+            label6.Location = new Point(631, 55);
             label6.Name = "label6";
-            label6.Size = new Size(144, 64);
+            label6.Size = new Size(71, 30);
             label6.TabIndex = 19;
             label6.Text = "Осталось к \r\nоплате";
             // 
             // numericUpDownCard
             // 
             numericUpDownCard.BorderStyle = BorderStyle.None;
-            numericUpDownCard.Location = new Point(449, 209);
-            numericUpDownCard.Margin = new Padding(6, 6, 6, 6);
+            numericUpDownCard.Location = new Point(242, 98);
             numericUpDownCard.Name = "numericUpDownCard";
-            numericUpDownCard.Size = new Size(176, 35);
+            numericUpDownCard.Size = new Size(95, 19);
             numericUpDownCard.TabIndex = 20;
             numericUpDownCard.ValueChanged += numericCard_Changed;
             // 
             // numericUpDownCash
             // 
             numericUpDownCash.BorderStyle = BorderStyle.None;
-            numericUpDownCash.Location = new Point(693, 209);
-            numericUpDownCash.Margin = new Padding(6, 6, 6, 6);
+            numericUpDownCash.Location = new Point(373, 98);
             numericUpDownCash.Name = "numericUpDownCash";
-            numericUpDownCash.Size = new Size(176, 35);
+            numericUpDownCash.Size = new Size(95, 19);
             numericUpDownCash.TabIndex = 21;
             numericUpDownCash.ValueChanged += numericCash_Changed;
             // 
             // numericUpDownBonus
             // 
             numericUpDownBonus.BorderStyle = BorderStyle.None;
-            numericUpDownBonus.Location = new Point(932, 207);
-            numericUpDownBonus.Margin = new Padding(6, 6, 6, 6);
+            numericUpDownBonus.Location = new Point(502, 97);
             numericUpDownBonus.Name = "numericUpDownBonus";
-            numericUpDownBonus.Size = new Size(176, 35);
+            numericUpDownBonus.Size = new Size(95, 19);
             numericUpDownBonus.TabIndex = 22;
             numericUpDownBonus.ValueChanged += numericBonus_Changed;
             // 
             // buttonPaymentViaParams
             // 
-            buttonPaymentViaParams.Location = new Point(1172, 271);
-            buttonPaymentViaParams.Margin = new Padding(6, 6, 6, 6);
+            buttonPaymentViaParams.Location = new Point(631, 127);
             buttonPaymentViaParams.Name = "buttonPaymentViaParams";
-            buttonPaymentViaParams.Size = new Size(186, 128);
+            buttonPaymentViaParams.Size = new Size(100, 60);
             buttonPaymentViaParams.TabIndex = 23;
             buttonPaymentViaParams.Text = "Оплатить ";
             buttonPaymentViaParams.UseVisualStyleBackColor = true;
@@ -208,10 +200,9 @@
             // 
             // buttonPayWithCardOnly
             // 
-            buttonPayWithCardOnly.Location = new Point(449, 271);
-            buttonPayWithCardOnly.Margin = new Padding(6, 6, 6, 6);
+            buttonPayWithCardOnly.Location = new Point(242, 127);
             buttonPayWithCardOnly.Name = "buttonPayWithCardOnly";
-            buttonPayWithCardOnly.Size = new Size(176, 128);
+            buttonPayWithCardOnly.Size = new Size(95, 60);
             buttonPayWithCardOnly.TabIndex = 26;
             buttonPayWithCardOnly.Text = "Полностью оплатить картой";
             buttonPayWithCardOnly.UseVisualStyleBackColor = true;
@@ -219,10 +210,9 @@
             // 
             // buttonPayWithCashOnly
             // 
-            buttonPayWithCashOnly.Location = new Point(693, 271);
-            buttonPayWithCashOnly.Margin = new Padding(6, 6, 6, 6);
+            buttonPayWithCashOnly.Location = new Point(373, 127);
             buttonPayWithCashOnly.Name = "buttonPayWithCashOnly";
-            buttonPayWithCashOnly.Size = new Size(176, 128);
+            buttonPayWithCashOnly.Size = new Size(95, 60);
             buttonPayWithCashOnly.TabIndex = 27;
             buttonPayWithCashOnly.Text = "Полностью оплатить наличными";
             buttonPayWithCashOnly.UseVisualStyleBackColor = true;
@@ -230,10 +220,9 @@
             // 
             // buttonBack
             // 
-            buttonBack.Location = new Point(165, 87);
-            buttonBack.Margin = new Padding(6, 6, 6, 6);
+            buttonBack.Location = new Point(89, 41);
             buttonBack.Name = "buttonBack";
-            buttonBack.Size = new Size(243, 49);
+            buttonBack.Size = new Size(131, 23);
             buttonBack.TabIndex = 28;
             buttonBack.Text = "Отменить покупку";
             buttonBack.UseVisualStyleBackColor = true;
@@ -243,11 +232,11 @@
             // 
             userInfoToLeft.BackColor = Color.Peru;
             userInfoToLeft.BorderStyle = BorderStyle.None;
-            userInfoToLeft.Location = new Point(20, 542);
-            userInfoToLeft.Margin = new Padding(4, 2, 4, 2);
+            userInfoToLeft.Location = new Point(11, 254);
+            userInfoToLeft.Margin = new Padding(2, 1, 2, 1);
             userInfoToLeft.Name = "userInfoToLeft";
             userInfoToLeft.ReadOnly = true;
-            userInfoToLeft.Size = new Size(413, 215);
+            userInfoToLeft.Size = new Size(222, 101);
             userInfoToLeft.TabIndex = 29;
             userInfoToLeft.Text = "";
             // 
@@ -257,19 +246,18 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label7.ForeColor = SystemColors.ButtonHighlight;
-            label7.Location = new Point(20, 461);
-            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Location = new Point(11, 216);
+            label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(319, 57);
+            label7.Size = new Size(156, 28);
             label7.TabIndex = 30;
             label7.Text = "У вас останется:";
             // 
             // buttonPayWithBonusOnly
             // 
-            buttonPayWithBonusOnly.Location = new Point(932, 271);
-            buttonPayWithBonusOnly.Margin = new Padding(6, 6, 6, 6);
+            buttonPayWithBonusOnly.Location = new Point(502, 127);
             buttonPayWithBonusOnly.Name = "buttonPayWithBonusOnly";
-            buttonPayWithBonusOnly.Size = new Size(176, 128);
+            buttonPayWithBonusOnly.Size = new Size(95, 60);
             buttonPayWithBonusOnly.TabIndex = 31;
             buttonPayWithBonusOnly.Text = "Полностью оплатить бонусами";
             buttonPayWithBonusOnly.UseVisualStyleBackColor = true;
@@ -277,11 +265,11 @@
             // 
             // PaymentForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.banya2__2_;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1404, 779);
+            ClientSize = new Size(756, 365);
             Controls.Add(buttonPayWithBonusOnly);
             Controls.Add(label7);
             Controls.Add(userInfoToLeft);
@@ -301,7 +289,6 @@
             Controls.Add(label2);
             Controls.Add(purchaceSum);
             Controls.Add(label1);
-            Margin = new Padding(6, 6, 6, 6);
             Name = "PaymentForm";
             Text = "PaymentForm";
             ((System.ComponentModel.ISupportInitialize)numericUpDownCard).EndInit();
