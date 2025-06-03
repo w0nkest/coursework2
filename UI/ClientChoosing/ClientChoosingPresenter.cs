@@ -11,7 +11,7 @@ namespace UI
     {
         private IClientChoosing view;
 
-        public ClientChoosingPresenter(IClientChoosing form, List<Client> clients) 
+        public ClientChoosingPresenter(IClientChoosing form, List<ClientFacade> clients) 
         { 
             view = form; 
             foreach (var client in clients)
@@ -24,7 +24,7 @@ namespace UI
             frm.Close();
         }
         
-        public void openNewTab(List<Goods> goods, Client client)
+        public void openNewTab(List<Goods> goods, ClientFacade client)
         {
             if (client is not null)
                 (new ClientForm(goods, client)).ShowDialog();

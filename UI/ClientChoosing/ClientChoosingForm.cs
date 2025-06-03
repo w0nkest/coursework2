@@ -13,11 +13,11 @@ namespace UI
 {
     public partial class ClientChoosingForm : Form, IClientChoosing
     {
-        private List<Client> clients;
+        private List<ClientFacade> clients;
         private ClientChoosingPresenter presenter;
         private List<Goods> goods;
 
-        public ClientChoosingForm(List<Client> clients, List<Goods> goods)
+        public ClientChoosingForm(List<ClientFacade> clients, List<Goods> goods)
         {
             InitializeComponent();
 
@@ -26,14 +26,14 @@ namespace UI
             presenter = new ClientChoosingPresenter(this, clients);
         }
 
-        public void clientListUpdate(Client client)
+        public void clientListUpdate(ClientFacade client)
         {
             clientList.Items.Add(client);
         }
 
         private void buttonSelect_Click(object sender, EventArgs e)
         {
-            presenter.openNewTab(goods, clientList.SelectedItem as Client);
+            presenter.openNewTab(goods, clientList.SelectedItem as ClientFacade);
         }
 
         private void buttonNotExist_Click(object sender, EventArgs e)

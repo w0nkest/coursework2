@@ -14,9 +14,9 @@ namespace UI
     public partial class AdminForm : Form
     {
         private List<Goods> goods;
-        private List<Client> clients;
+        private List<ClientFacade> clients;
 
-        public AdminForm(List<Goods> goods, List<Client> clients)
+        public AdminForm(List<Goods> goods, List<ClientFacade> clients)
         {
             InitializeComponent();
 
@@ -26,7 +26,7 @@ namespace UI
 
         private void buttonAdminClient_Click(object sender, EventArgs e)
         {
-            //openForm();
+            new AdminClientForm(clients).ShowDialog();
         }
 
         private void buttonAdminProduct_Click(object sender, EventArgs e)

@@ -11,6 +11,6 @@ namespace UI
     {
         void closeTab(Form frm);
 
-        void openNewTab(List<Goods> goods, Client client);
+        void openNewTab(List<Goods> goods, ClientFacade client);
     }
 }

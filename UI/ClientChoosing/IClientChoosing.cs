@@ -9,7 +9,7 @@ namespace UI
 {
     internal interface IClientChoosing
     {
-        void clientListUpdate(Client client);
+        void clientListUpdate(ClientFacade client);
 
         void raiseMsgBox(string msg);
     }

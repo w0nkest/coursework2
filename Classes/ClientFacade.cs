@@ -42,5 +42,10 @@ namespace Classes
         public void WithdrawBonus(int value) => client.ExecuteCommand(new CommandWithdrawBonus(bonus, value));
 
         public int GetBonus() => client.getBonuses();
+
+        public override string ToString()
+        {
+            return GetName();
+        }
     }
 }

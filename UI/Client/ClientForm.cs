@@ -15,13 +15,11 @@ namespace UI
     {
         ClientPresenter presenter;
         List<Goods> goods;
-        public ClientForm(List<Goods> good, Client client)
+        public ClientForm(List<Goods> good, ClientFacade client)
         {
             InitializeComponent();
-            ClientFacade f = new ClientFacade(client);
-
             goods = good;
-            presenter = new ClientPresenter(this, f, goods);
+            presenter = new ClientPresenter(this, client, goods);
         }
 
         public void raiseMsgBox(string msg)

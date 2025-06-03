@@ -14,9 +14,9 @@ namespace UI
     public partial class MenuForm : Form
     {
         private List<Goods> goods;
-        private List<Client> clients;
+        private List<ClientFacade> clients;
 
-        public MenuForm(List<Client> clients, List<Goods> good)
+        public MenuForm(List<ClientFacade> clients, List<Goods> good)
         {
             InitializeComponent();
 

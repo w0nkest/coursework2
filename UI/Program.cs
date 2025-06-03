@@ -10,7 +10,7 @@ namespace UI
         static void Main()
         {
             List<Goods> productList = new List<Goods>();
-            List<Client> clientList = new List<Client>();   
+            List<ClientFacade> clientList = new List<ClientFacade>();   
 
             SQLitePCL.Batteries.Init();
 
@@ -58,7 +58,9 @@ namespace UI
 
                         Client c = new Client(reader["name"].ToString(), wallet);
 
-                        clientList.Add(c);
+                        ClientFacade f = new ClientFacade(c);
+
+                        clientList.Add(f);
                     }
                 }
             }
