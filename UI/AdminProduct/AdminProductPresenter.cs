@@ -40,6 +40,14 @@ namespace UI
                 view.raiseMsgBox("Товар не был выбран!");
                 return;
             }
+
+            if (!int.TryParse(newprice, out int result))
+            {
+                view.raiseMsgBox("Цена не является целочисленным значением!");
+                view.setPrice("");
+                return;
+            }
+
             if (newname.Length == 0 || newprice.Length == 0)
             {
                 view.raiseMsgBox("Какое-то значение не было введено!");
@@ -76,6 +84,13 @@ namespace UI
 
         public void createProduct(string newname, string newprice, bool isTime)
         {
+            if (!int.TryParse(newprice, out int result))
+            {
+                view.raiseMsgBox("Цена не является целочисленным значением!");
+                view.setPrice("");
+                return;
+            }
+
             if (newname.Length == 0 || newprice.Length == 0)
             {
                 view.raiseMsgBox("Какое-то значение не было введено!");
@@ -138,7 +153,7 @@ namespace UI
                             if (typeof(TimeGoods) == good.GetType())
                             {
                                 command.CommandText = "INSERT INTO time_products (product, price_per_hour)" +
-                                    $"VALUES ('{good.Name}', {good.GetPrice()})";
+                                    $"VALUES ('{good.Name}', {good.Price})";
                             }
                             else
                             {
@@ -154,6 +169,7 @@ namespace UI
                         transaction.Rollback();
                     }
                 }
+                connection.Close();
             }
         }
 
@@ -185,6 +201,7 @@ namespace UI
                         transaction.Rollback();
                     }
                 }
+                connection.Close();
             }
         }
 
@@ -216,6 +233,7 @@ namespace UI
                         transaction.Rollback();
                     }
                 }
+                connection.Close();
             }
         }
     }

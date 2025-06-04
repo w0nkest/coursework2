@@ -47,6 +47,7 @@ namespace UI
                 view.textBoxNameSet("");
                 view.textBoxCardSet("");
                 view.textBoxCashSet("");
+                view.textBoxBonusSet("");
                 clientDeleting(client);
             }
             else view.raiseMsgBox("Клиент не выбран");
@@ -145,6 +146,7 @@ namespace UI
                         transaction.Rollback();
                     }
                 }
+                connection.Close();
             }
         }
 
@@ -211,6 +213,7 @@ namespace UI
                         transaction.Rollback();
                     }
                 }
+                connection.Close();
             }
         }
 

@@ -50,10 +50,11 @@
             goodsList.BackColor = Color.SandyBrown;
             goodsList.BorderStyle = BorderStyle.None;
             goodsList.FormattingEnabled = true;
-            goodsList.Location = new Point(19, 75);
-            goodsList.Margin = new Padding(4, 2, 4, 2);
+            goodsList.ItemHeight = 15;
+            goodsList.Location = new Point(10, 35);
+            goodsList.Margin = new Padding(2, 1, 2, 1);
             goodsList.Name = "goodsList";
-            goodsList.Size = new Size(414, 448);
+            goodsList.Size = new Size(223, 210);
             goodsList.TabIndex = 0;
             // 
             // label1
@@ -62,19 +63,19 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(19, 0);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(10, 0);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(144, 57);
+            label1.Size = new Size(71, 28);
             label1.TabIndex = 1;
             label1.Text = "Товары";
             // 
             // buttonAdd
             // 
-            buttonAdd.Location = new Point(444, 448);
-            buttonAdd.Margin = new Padding(4, 2, 4, 2);
+            buttonAdd.Location = new Point(239, 210);
+            buttonAdd.Margin = new Padding(2, 1, 2, 1);
             buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(150, 81);
+            buttonAdd.Size = new Size(81, 38);
             buttonAdd.TabIndex = 2;
             buttonAdd.Text = "Добавить в корзину";
             buttonAdd.UseVisualStyleBackColor = true;
@@ -85,10 +86,11 @@
             cartList.BackColor = Color.SandyBrown;
             cartList.BorderStyle = BorderStyle.None;
             cartList.FormattingEnabled = true;
-            cartList.Location = new Point(966, 75);
-            cartList.Margin = new Padding(4, 2, 4, 2);
+            cartList.ItemHeight = 15;
+            cartList.Location = new Point(520, 35);
+            cartList.Margin = new Padding(2, 1, 2, 1);
             cartList.Name = "cartList";
-            cartList.Size = new Size(414, 448);
+            cartList.Size = new Size(223, 210);
             cartList.TabIndex = 3;
             cartList.SelectedIndexChanged += CartList_SelectedIndexChanged;
             // 
@@ -98,19 +100,19 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(966, 0);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(520, 0);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(167, 57);
+            label2.Size = new Size(82, 28);
             label2.TabIndex = 4;
             label2.Text = "Корзина";
             // 
             // buttonRemove
             // 
-            buttonRemove.Location = new Point(808, 448);
-            buttonRemove.Margin = new Padding(4, 2, 4, 2);
+            buttonRemove.Location = new Point(435, 210);
+            buttonRemove.Margin = new Padding(2, 1, 2, 1);
             buttonRemove.Name = "buttonRemove";
-            buttonRemove.Size = new Size(150, 81);
+            buttonRemove.Size = new Size(81, 38);
             buttonRemove.TabIndex = 5;
             buttonRemove.Text = "Удалить из корзины";
             buttonRemove.UseVisualStyleBackColor = true;
@@ -120,11 +122,11 @@
             // 
             userInfo.BackColor = Color.Peru;
             userInfo.BorderStyle = BorderStyle.None;
-            userInfo.Location = new Point(464, 21);
-            userInfo.Margin = new Padding(4, 2, 4, 2);
+            userInfo.Location = new Point(250, 10);
+            userInfo.Margin = new Padding(2, 1, 2, 1);
             userInfo.Name = "userInfo";
             userInfo.ReadOnly = true;
-            userInfo.Size = new Size(461, 177);
+            userInfo.Size = new Size(248, 83);
             userInfo.TabIndex = 6;
             userInfo.Text = "";
             // 
@@ -134,10 +136,10 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(819, 533);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(441, 250);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(150, 57);
+            label3.Size = new Size(74, 28);
             label3.TabIndex = 7;
             label3.Text = "Сумма:";
             // 
@@ -145,21 +147,21 @@
             // 
             purchaceSum.BackColor = Color.SandyBrown;
             purchaceSum.BorderStyle = BorderStyle.None;
-            purchaceSum.Location = new Point(966, 544);
-            purchaceSum.Margin = new Padding(4, 2, 4, 2);
+            purchaceSum.Location = new Point(520, 255);
+            purchaceSum.Margin = new Padding(2, 1, 2, 1);
             purchaceSum.Name = "purchaceSum";
             purchaceSum.ReadOnly = true;
             purchaceSum.RightToLeft = RightToLeft.Yes;
-            purchaceSum.Size = new Size(405, 32);
+            purchaceSum.Size = new Size(218, 16);
             purchaceSum.TabIndex = 8;
             purchaceSum.Text = "0";
             // 
             // buttonPayment
             // 
-            buttonPayment.Location = new Point(1047, 597);
-            buttonPayment.Margin = new Padding(4, 2, 4, 2);
+            buttonPayment.Location = new Point(564, 280);
+            buttonPayment.Margin = new Padding(2, 1, 2, 1);
             buttonPayment.Name = "buttonPayment";
-            buttonPayment.Size = new Size(240, 49);
+            buttonPayment.Size = new Size(129, 23);
             buttonPayment.TabIndex = 9;
             buttonPayment.Text = "Перейти к оплате";
             buttonPayment.UseVisualStyleBackColor = true;
@@ -168,11 +170,10 @@
             // amountInCart
             // 
             amountInCart.BorderStyle = BorderStyle.None;
-            amountInCart.Location = new Point(773, 294);
-            amountInCart.Margin = new Padding(6);
+            amountInCart.Location = new Point(416, 138);
             amountInCart.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
             amountInCart.Name = "amountInCart";
-            amountInCart.Size = new Size(132, 35);
+            amountInCart.Size = new Size(71, 19);
             amountInCart.TabIndex = 10;
             amountInCart.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -182,10 +183,9 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(768, 224);
-            label4.Margin = new Padding(6, 0, 6, 0);
+            label4.Location = new Point(413, 102);
             label4.Name = "label4";
-            label4.Size = new Size(157, 64);
+            label4.Size = new Size(81, 30);
             label4.TabIndex = 11;
             label4.Text = "Изменение \r\nколичества";
             // 
@@ -193,19 +193,17 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Location = new Point(929, 256);
-            label5.Margin = new Padding(6, 0, 6, 0);
+            label5.Location = new Point(500, 120);
             label5.Name = "label5";
-            label5.Size = new Size(30, 32);
+            label5.Size = new Size(15, 15);
             label5.TabIndex = 12;
             label5.Text = "<";
             // 
             // buttonConfirmValue
             // 
-            buttonConfirmValue.Location = new Point(773, 356);
-            buttonConfirmValue.Margin = new Padding(6);
+            buttonConfirmValue.Location = new Point(416, 167);
             buttonConfirmValue.Name = "buttonConfirmValue";
-            buttonConfirmValue.Size = new Size(132, 49);
+            buttonConfirmValue.Size = new Size(71, 23);
             buttonConfirmValue.TabIndex = 13;
             buttonConfirmValue.Text = "Изменить";
             buttonConfirmValue.UseVisualStyleBackColor = true;
@@ -213,11 +211,11 @@
             // 
             // ClientForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.banya1;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1406, 668);
+            ClientSize = new Size(757, 313);
             Controls.Add(buttonConfirmValue);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -233,7 +231,7 @@
             Controls.Add(label1);
             Controls.Add(goodsList);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 2, 4, 2);
+            Margin = new Padding(2, 1, 2, 1);
             Name = "ClientForm";
             Text = "ClientForm";
             ((System.ComponentModel.ISupportInitialize)amountInCart).EndInit();
