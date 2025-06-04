@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Classes
+﻿namespace Classes
 {
-    public class CommandAddCash : ICommand
+    public sealed class CommandAddCash : ICommand
     {
         private Wallet wallet;
         private int value;
@@ -25,7 +19,7 @@ namespace Classes
         public void Undo() => wallet.Cash = previousvalue;
     }
 
-    public class CommandWithdrawCash : ICommand
+    public sealed class CommandWithdrawCash : ICommand
     {
         private Wallet wallet;
         private int value;

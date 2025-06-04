@@ -1,6 +1,6 @@
 ﻿namespace Classes
 {
-    public class CommandAddCard : ICommand
+    public sealed class CommandAddCard : ICommand
     {
         private BankCard bankCard;
         private int value;
@@ -19,7 +19,7 @@
         public void Undo() => bankCard.Money = previousvalue;
     }
 
-    public class CommandWithdrawCard : ICommand
+    public sealed class CommandWithdrawCard : ICommand
     {
         private BankCard bankCard;
         private int value;

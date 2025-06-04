@@ -1,6 +1,6 @@
 ﻿namespace Classes
 {
-    public class CommandAddBonus : ICommand
+    public sealed class CommandAddBonus : ICommand
     {
         private Bonus bonus;
         private int value;
@@ -25,7 +25,7 @@
         }
     }
 
-    public class CommandWithdrawBonus : ICommand
+    public sealed class CommandWithdrawBonus : ICommand
     {
         private Bonus bonus;
         private int value;

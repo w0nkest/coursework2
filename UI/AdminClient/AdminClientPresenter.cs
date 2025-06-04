@@ -10,7 +10,7 @@ using SQLitePCL;
 
 namespace UI
 {
-    internal class AdminClientPresenter
+    internal class AdminClientPresenter : IAdminClientPresenter
     {
         private IAdminClient view;
         private List<ClientFacade> clients;

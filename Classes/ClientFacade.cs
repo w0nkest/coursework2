@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace Classes
+﻿namespace Classes
 {
     public class ClientFacade
     {
@@ -28,7 +20,7 @@ namespace Classes
             return wallet;
         }
 
-        public Dictionary<string, int> IDs()
+        public virtual Dictionary<string, int> IDs()
         {
             return new Dictionary<string, int> { { "cID", client.ID }, { "bID", card.ID} };
         }

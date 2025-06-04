@@ -41,7 +41,7 @@
             else return;
         }
 
-        public string AllInfo()
+        public virtual string AllInfo()
         {
             return $"{this.Bank}, {this.Number}, {this.CVC}";
         }
@@ -53,7 +53,7 @@
             return list[rand.Next(0, list.Count - 1)];
         }
 
-        protected virtual void NumberGenerator(int parts, int lenth, out string s)
+        protected virtual void NumberGenerator(int parts, int length, out string s)
         {
             s = "";
             Random rand = new Random();
@@ -61,7 +61,7 @@
             for (int i = 0; i < parts; i++)
             {
                 string stringMaxValue = "1";
-                for (int j = 0; j < lenth; j++)
+                for (int j = 0; j < length; j++)
                 {
                     stringMaxValue += "0";
                 }
@@ -69,18 +69,18 @@
                 int maxValue = Convert.ToInt32(stringMaxValue);
 
                 string randNum = rand.Next(maxValue).ToString();
-                LeftZeroFiller(ref randNum, lenth);
+                LeftZeroFiller(ref randNum, length);
 
                 s += randNum;
                 if (i != parts - 1) s += " ";
             }
         }
 
-        protected void LeftZeroFiller(ref string s, int rightEdge)
+        protected void LeftZeroFiller(ref string s, int totallenght)
         {
-            if (s.Length < rightEdge)
+            if (s.Length < totallenght)
             {
-                for (int j = s.Length; j < rightEdge; j++)
+                for (int j = s.Length; j < totallenght; j++)
                 {
                     s = "0" + s;
                 }
